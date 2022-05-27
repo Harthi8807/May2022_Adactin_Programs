@@ -1,0 +1,157 @@
+package com.New_Maven_Project;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver.Navigation;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.ClickAction;
+import org.openqa.selenium.support.ui.Select;
+
+public class Example {
+	public static WebDriver driver;
+	//public static String url;
+
+	//browserlaunch
+public static WebDriver BrowserLaunch(String browsername) {
+
+	if(browsername.equalsIgnoreCase("chrome"))
+	{
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Welcome\\eclipse-workspace\\New_Maven_Project\\Drivers\\chromedriver.exe");
+		driver= new ChromeDriver();
+	}
+	else if(browsername.equalsIgnoreCase("IE"))
+	{
+		System.setProperty("webdriver.ie.driver", "C:\\Users\\Welcome\\eclipse-workspace\\Project_Maven\\Drivers\\IEDriverServer.exe");
+		
+		driver= new InternetExplorerDriver();
+				
+}
+	return driver;
+
+	
+}
+//urllaunch
+public static void URLLaunch(String URL) {
+	driver.get(URL);
+
+}
+
+
+//Title
+public static void TitleofthePage()
+{
+	
+String title = driver.getTitle();	
+System.out.println("Title of the Current Window:"+title);
+}
+//CurrentUrl
+
+public static void CurrentURL() {
+String curl = driver.getCurrentUrl();
+System.out.println("Current URL :"+curl);
+}
+
+//screenshots
+public static void ScreenShots() throws IOException {
+	TakesScreenshot t=(TakesScreenshot) driver;
+	File src=t.getScreenshotAs(OutputType.FILE);
+	File des=new File("C:\\Users\\Welcome\\eclipse-workspace\\New_Maven_Project\\Screenshots\\img1.png");
+	FileUtils.copyFile(src ,des);
+	
+	
+}
+
+//close
+public static void WindowClose() {
+
+driver.close();
+}
+
+//navigation
+public static void Navigation(String url) {
+		driver.navigate().to(url);
+}
+public static void NavigationOperation(String navi) {
+	if(navi.equalsIgnoreCase("back"))
+		driver.navigate().back();
+	else if(navi.equalsIgnoreCase("forward"))
+	driver.navigate().forward();
+	else
+		driver.navigate().refresh();
+
+}
+	public static void Scrolling(String move) {
+	
+		JavascriptExecutor js=  (JavascriptExecutor) driver;
+		if(move.equalsIgnoreCase("down"))
+		{
+			
+			js.executeScript("window.scrollBy(0,4500);");
+		}
+		else
+		{
+			js.executeScript("window.scrollBy(0,100);");
+		}
+	
+	}
+
+public static void ExitOperation() {
+	driver.quit(); 
+
+}
+public static void sendvalues(WebElement element,String value) {
+	element.sendKeys(value);
+
+}
+public static void Click(WebElement element) {
+	element.click();
+}
+
+public static void dropdown(WebElement element, String method, String value) {
+
+Select s=new Select(element);
+if(method.equalsIgnoreCase("value"))
+{
+	s.selectByValue(value);
+}
+else if(method.equalsIgnoreCase("text"))
+{
+	s.selectByVisibleText(value);
+	}
+else if(method.equalsIgnoreCase("index"))
+{
+	int index=Integer.parseInt(value);
+	s.selectByIndex(index);
+			
+}
+}
+public static void Alert(WebElement element, String alert) {
+	if(alert.equalsIgnoreCase("confirm"))
+	{
+		driver.switchTo().alert().accept();
+	}
+	else if(alert.equalsIgnoreCase("normal"))
+			{
+		driver.switchTo().alert().accept();
+			}
+	else if(alert.equalsIgnoreCase("prompt"))
+	{
+		driver.switchTo().alert().accept();
+	}
+	else if(alert.equalsIgnoreCase("LineBreaks"))
+	{
+		driver.switchTo().alert().dismiss();
+	}
+}
+
+}
+

@@ -1,0 +1,29 @@
+package com.Adactin_Base;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class logout {
+
+	private WebDriver driver;
+	
+	@FindBy(xpath = "//a[text()='Logout']")
+	private WebElement logout;
+	public WebDriver getDriver() {
+		return driver;
+	}
+
+	public WebElement getLogout() {
+		return logout;
+	}
+
+
+	
+	public logout(WebDriver driver4)
+	{
+		driver=driver4;
+		PageFactory.initElements(driver, this);
+	}
+}

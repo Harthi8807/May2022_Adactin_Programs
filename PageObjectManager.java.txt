@@ -1,0 +1,53 @@
+package com.POMofPOM;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+
+import com.Adactin_Base.Adactin_login;
+import com.Adactin_Base.BookHotel;
+import com.Adactin_Base.SearchHotel;
+import com.Adactin_Base.SelectHotel;
+import com.Adactin_Base.logout;
+
+public class PageObjectManager {
+
+	WebDriver driver;
+	private Adactin_login login;
+	private BookHotel bkhtl;
+	private SearchHotel srch;
+	private SelectHotel slct;
+	private logout lg;
+	public WebDriver getDriver() {
+		return driver;
+	}
+	public Adactin_login getLogin() {
+		
+		login= new Adactin_login(driver);
+		
+		return login;
+	}
+	public BookHotel getBkhtl() {
+		bkhtl= new BookHotel(driver);
+		return bkhtl;
+	}
+	public SearchHotel getSrch() {
+		srch= new SearchHotel(driver);
+		return srch;
+	}
+	public SelectHotel getSlct() {
+		slct = new SelectHotel(driver);
+		return slct;
+	}
+	public logout getLg() {
+		lg=new logout(driver);
+		return lg;
+	}
+	
+	public PageObjectManager(WebDriver driver4)
+	{
+		driver = driver4;
+		PageFactory.initElements(driver, this);
+		
+	}
+	
+}
